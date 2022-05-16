@@ -18,7 +18,7 @@ describe('Planner App', () => {
     const contentInput = screen.getByPlaceholderText(
       "A brief description of what you're planning"
     );
-    const addButton = screen.getByRole('button');
+    const addButton = screen.getByText('Add Entry');
 
     // Add a new entry
     userEvent.type(titleInput, 'My test entry!');
