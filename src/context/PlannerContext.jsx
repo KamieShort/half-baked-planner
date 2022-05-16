@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { parseDate } from '../utils/parseDate';
 
-// const initialState= [{ id: 0, text: 'initial post'}]
+// const initialState = [
+//   { id: 0, content: 'initial post', title: 'initial title' },
+// ];
 
 // payload is an entry object:
 // { title: String, content: String, date: Date }
@@ -57,12 +59,22 @@ const PlannerProvider = ({ children }) => {
     return entries.find((note) => note.id === Number(id));
   };
 
+  const handleEdit = (entry) => {
+    dispatch({ type: 'update', payload: { entry } });
+  };
+
+  const handleDelete = (id) => {
+    dispatch({ type: 'delete', payload: { id: id } });
+  };
+
   return (
     <PlannerContext.Provider
       value={{
         entries,
         addEntry,
         getEntry,
+        handleEdit,
+        handleDelete,
       }}
     >
       {children}

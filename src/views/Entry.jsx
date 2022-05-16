@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEntries } from '../context/PlannerContext';
+import EditForm from '../components/Edit';
 
 import styles from './Entry.css';
 
 export default function Entry() {
   const { id } = useParams();
   const [entry, setEntry] = useState({});
-  const { entries, getEntry } = useEntries();
+  const { entries, getEntry, handleEdit, handleDelete } = useEntries();
 
   useEffect(() => {
     setEntry(getEntry(id));
   }, [id, entries.length]);
+
+  console.log(entries);
 
   return (
     <>
@@ -24,6 +27,8 @@ export default function Entry() {
         <p>Due: {entry?.date}</p>
         <p>{entry?.content}</p>
       </article>
+      {/* <EditForm entry={entry} edit={handleEdit} /> */}
+ 
     </>
   );
 }

@@ -15,10 +15,12 @@ export default function Entries() {
   // ];
 
   return (
-    <ul className={styles.list}>
-      {entries.map(({ id, title, date }) => (
-        <Entry key={id} id={id} title={title} date={date} />
-      ))}
-    </ul>
+    <>
+      <ul className={styles.list}>
+        {entries.map(({ id, title, date }) => (
+          <Entry key={id} id={id} title={title} date={date} />
+        ))}
+      </ul>
+    </>
   );
 }
