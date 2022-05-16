@@ -7,7 +7,7 @@ export default function Header() {
     <header className={styles.header}>
       <h2>My Planner</h2>
 
-      <span>{entries.length} Item Left</span>
+      <span>{entries.length} Item(s) Left</span>
     </header>
   );
 }

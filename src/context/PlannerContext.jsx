@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { parseDate } from '../utils/parseDate';
 
+// const initialState= [{ id: 0, text: 'initial post'}]
+
 // payload is an entry object:
 // { title: String, content: String, date: Date }
 function entriesReducer(entries, { type, payload }) {
