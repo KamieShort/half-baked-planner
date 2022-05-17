@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useEntries } from '../context/PlannerContext';
 
-export default function EditForm({ entry, edit }) {
+export default function EditForm({ entry }) {
   const [editing, setEditing] = useState(false);
+  const { edit, setEdit } = useEntries();
 
   let conditionalContent;
 
@@ -15,8 +17,8 @@ export default function EditForm({ entry, edit }) {
       >
         <input
           type="text"
-          value={entry.content}
-          onChange={(e) => edit({ ...entry, content: e.target.value })}
+          value={entry.edit}
+          onChange={(e) => setEdit({ content: e.target.value })}
         />
         <button type="submit">Save</button>
       </form>

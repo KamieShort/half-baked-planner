@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { parseDate } from '../utils/parseDate';
+import { useState } from 'react';
 
 // const initialState = [
 //   { id: 0, content: 'initial post', title: 'initial title' },
@@ -29,6 +30,7 @@ export const PlannerContext = createContext();
 
 const PlannerProvider = ({ children }) => {
   const [entries, dispatch] = useReducer(entriesReducer, []);
+  const [edit, setEdit] = useState('');
 
   useEffect(() => {
     // Note that 'entries' below would likely be an API request in practice
@@ -75,6 +77,8 @@ const PlannerProvider = ({ children }) => {
         getEntry,
         handleEdit,
         handleDelete,
+        edit,
+        setEdit,
       }}
     >
       {children}
