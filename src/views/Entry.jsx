@@ -9,7 +9,7 @@ import styles from './Entry.css';
 export default function Entry() {
   const { id } = useParams();
   const [entry, setEntry] = useState({});
-  const { entries, getEntry, handleEdit, handleDelete } = useEntries();
+  const { entries, getEntry, handleEdit } = useEntries();
 
   useEffect(() => {
     setEntry(getEntry(id));
@@ -27,8 +27,7 @@ export default function Entry() {
         <p>Due: {entry?.date}</p>
         <p>{entry?.content}</p>
       </article>
-      {/* <EditForm entry={entry} edit={handleEdit} /> */}
- 
+      <EditForm entry={entry} edit={handleEdit} />
     </>
   );
 }

@@ -1,27 +1,35 @@
-// import React from 'react';
+import React, { useState } from 'react';
 
-// export default function EditForm({ entry, edit }) {
-//   const [editing, setEditing] = useState(false);
+export default function EditForm({ entry, edit }) {
+  const [editing, setEditing] = useState(false);
 
-//   let content
+  let conditionalContent;
 
-//   if (editing) {
-//       content = (
+  if (editing) {
+    conditionalContent = (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setEditing(false);
+        }}
+      >
+        <input
+          type="text"
+          value={entry.content}
+          onChange={(e) => edit({ ...entry, content: e.target.value })}
+        />
+        <button type="submit">Save</button>
+      </form>
+    );
+  } else {
+    conditionalContent = (
+      <div>
+        <button type="button" onClick={() => setEditing(true)}>
+          Edit
+        </button>
+      </div>
+    );
+  }
 
-//   <form
-//   onSubmit={(e) => {
-//     e.preventDefault();
-//   }}
-// >
-//   <input
-//     type="text"
-//     value={entry.title}
-//     onChange={(e) => edit({ ...entry, content: e.target.value })}
-//   />
-// </form>
-// )
-
-//     return (
-
-//     );
-// }
+  return conditionalContent;
+}
