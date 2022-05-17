@@ -9,6 +9,7 @@ import { useState } from 'react';
 // payload is an entry object:
 // { title: String, content: String, date: Date }
 function entriesReducer(entries, { type, payload }) {
+  console.log(payload);
   switch (type) {
     case 'create':
       const entry = { ...payload, id: entries.length };
@@ -30,7 +31,8 @@ export const PlannerContext = createContext();
 
 const PlannerProvider = ({ children }) => {
   const [entries, dispatch] = useReducer(entriesReducer, []);
-  const [edit, setEdit] = useState('');
+  console.log(entries);
+  const [edit, setEdit] = useState({});
 
   useEffect(() => {
     // Note that 'entries' below would likely be an API request in practice
@@ -62,7 +64,7 @@ const PlannerProvider = ({ children }) => {
   };
 
   const handleEdit = (entry) => {
-    dispatch({ type: 'update', payload: { entry } });
+    dispatch({ type: 'update', payload: { ...entry } });
   };
 
   const handleDelete = (id) => {

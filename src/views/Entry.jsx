@@ -13,7 +13,7 @@ export default function Entry() {
 
   useEffect(() => {
     setEntry(getEntry(id));
-  }, [id, entries.length]);
+  }, [id, entries]);
 
   console.log(entries);
 
