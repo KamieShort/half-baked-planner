@@ -1,9 +1,15 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { parseDate } from '../utils/parseDate';
+import { useState } from 'react';
+
+// const initialState = [
+//   { id: 0, content: 'initial post', title: 'initial title' },
+// ];
 
 // payload is an entry object:
 // { title: String, content: String, date: Date }
 function entriesReducer(entries, { type, payload }) {
+  console.log(payload);
   switch (type) {
     case 'create':
       const entry = { ...payload, id: entries.length };
@@ -25,6 +31,8 @@ export const PlannerContext = createContext();
 
 const PlannerProvider = ({ children }) => {
   const [entries, dispatch] = useReducer(entriesReducer, []);
+  console.log(entries);
+  const [edit, setEdit] = useState({});
 
   useEffect(() => {
     // Note that 'entries' below would likely be an API request in practice
@@ -55,12 +63,24 @@ const PlannerProvider = ({ children }) => {
     return entries.find((note) => note.id === Number(id));
   };
 
+  const handleEdit = (entry) => {
+    dispatch({ type: 'update', payload: { ...entry } });
+  };
+
+  const handleDelete = (id) => {
+    dispatch({ type: 'delete', payload: { id: id } });
+  };
+
   return (
     <PlannerContext.Provider
       value={{
         entries,
         addEntry,
         getEntry,
+        handleEdit,
+        handleDelete,
+        edit,
+        setEdit,
       }}
     >
       {children}
